@@ -5,7 +5,7 @@
  */
 package service;
 import model.Tabungan;
-import dao.DaoTabungan;
+import dao_impl.DaoTabungan;
 /**
  *
  * @author Rachmad
