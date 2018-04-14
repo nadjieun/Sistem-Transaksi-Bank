@@ -5,6 +5,7 @@
  */
 package dao_impl;
 
+import dao.DaoApp;
 import java.sql.Connection;
 import model.Tabungan;
 import java.sql.DriverManager;
@@ -15,12 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Nasabah;
 
 /**
  *
  * @author Rachmad
  */
-public class DaoTabungan {
+public class DaoTabungan implements DaoApp<Tabungan, Long>{
     public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     public static final String DB_Name = "bank_nr";
     public static final String DB_URL = "jdbc:mysql://localhost/"+DB_Name;
@@ -33,7 +35,7 @@ public class DaoTabungan {
     
     public DaoTabungan(){
         create_database();
-        create_table_nasabah();
+        create_table_tabungan();
     }
     
     private void openConnection(){
@@ -55,7 +57,7 @@ public class DaoTabungan {
             Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
-    
+    @Override
     public void save(Tabungan tabungan){
         openConnection();
         try{
@@ -98,7 +100,8 @@ public class DaoTabungan {
         closeConnection();
     }
     
-    public void delete(long rek){
+    @Override
+    public void delete(Long rekening){
         openConnection();
         try{
             if(conn == null){
@@ -106,7 +109,7 @@ public class DaoTabungan {
                 return;                
             }
             stmt = conn.createStatement();
-            String sql = "DELETE FROM "+tbl_tabungan+"WHERE rekening ="+rek;
+            String sql = "DELETE FROM "+tbl_tabungan+"WHERE rekening ="+rekening;
             stmt.executeUpdate(sql);
         }
         catch(SQLException ex){
@@ -144,7 +147,8 @@ public class DaoTabungan {
         return new_tabungan;
     }
 
-    public Tabungan findById(long rekening){
+    @Override
+    public Tabungan findById(Long rekening){
         Tabungan tabungan = null;
         openConnection();
         try{
@@ -204,7 +208,7 @@ public class DaoTabungan {
         }
     }
     
-    private void create_table_nasabah(){
+    private void create_table_tabungan(){
         Connection conn = null;
         Statement stmt = null;
         try{

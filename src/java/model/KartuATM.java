@@ -10,6 +10,17 @@ package model;
  * @author USER
  */
 public enum KartuATM {
-    Silver, Gold, Platinum
+    SILVER("3000000"), 
+    GOLD("5000000"), 
+    PLATINUM("10000000");
     
+    private String maxNominal;
+
+    KartuATM(String maxNominal) {
+        this.maxNominal = maxNominal;
+    }
+
+    public String maxNominal() {
+        return maxNominal;
+    }
 }
