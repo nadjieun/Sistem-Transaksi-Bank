@@ -5,12 +5,26 @@
  */
 package model;
 
+import service.ServiceTabungan;
+
 /**
  *
  * @author Rachmad
  */
 public class TransaksiOnline extends SystemTransaksi {
-    public boolean transfer(long nominal, long rekTujuan, int token){
-        return true;
+    Tabungan tabungan;
+    Tabungan tabungan2;
+    ServiceTabungan serviceTabungan;
+    public boolean transfer(long nominal, Long rekTujuan, Integer token){
+        if(token.equals(tabungan.getPass())){
+            if(tabungan.getSaldo()-nominal >= 0){
+                if(tabungan2.getRekening().equals(rekTujuan)){
+                    tabungan.setSaldo(tabungan.getSaldo()-nominal);
+                    serviceTabungan.login(tabungan2);
+                    tabungan2.setSaldo(tabungan2.getSaldo()+nominal);
+                }
+            }
+        }
+        return false;
     }
 }
