@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package dao_impl;
 
 import java.sql.Connection;
-import model.Tabungan;
+import model.Nasabah;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,18 +20,18 @@ import java.util.logging.Logger;
  *
  * @author Rachmad
  */
-public class DaoTabungan {
+public class DaoNasabah {
     public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     public static final String DB_Name = "bank_nr";
     public static final String DB_URL = "jdbc:mysql://localhost/"+DB_Name;
     
     public static final String USER = "root";
     public static final String PASS = "";
-    public static final String tbl_tabungan = "tabungan";
+    public static final String tbl_nasabah = "nasabah";
     Connection conn = null;
     Statement stmt = null;
     
-    public DaoTabungan(){
+    public DaoNasabah(){
         create_database();
         create_table_nasabah();
     }
@@ -41,9 +41,9 @@ public class DaoTabungan {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
         }catch(ClassNotFoundException ex){
-            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(DaoNasabah.class.getName()).log(Level.SEVERE,null,ex);
         }catch(SQLException ex){
-            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(DaoNasabah.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
     
@@ -52,11 +52,11 @@ public class DaoTabungan {
             if(conn != null)
                 conn.close();
         }catch(SQLException ex){
-            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(DaoNasabah.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
     
-    public void save(Tabungan tabungan){
+    public void save(Nasabah nasabah){
         openConnection();
         try{
             if(conn == null){
@@ -64,21 +64,19 @@ public class DaoTabungan {
                 return;                
             }
             stmt = conn.createStatement();
-            String sql = "INSERT INTO "+tbl_tabungan
-                    +" (user,pass,saldo)"
+            String sql = "INSERT INTO "+tbl_nasabah
+                    +" (id)"
                     +"VALUES ("
-                    +"'"+tabungan.getUser()+"'"
-                    +", "+tabungan.getPass()+", "
-                    +tabungan.getSaldo()+")";
+                    +nasabah.getId()+")";
             stmt.executeUpdate(sql);
         }
         catch(SQLException ex){
-            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(DaoNasabah.class.getName()).log(Level.SEVERE,null,ex);
         }
         closeConnection();
     }
-    
-    public void update(long rek, Tabungan tabungan){
+        
+    public void delete(long id){
         openConnection();
         try{
             if(conn == null){
@@ -86,66 +84,17 @@ public class DaoTabungan {
                 return;                
             }
             stmt = conn.createStatement();
-            String sql = "UPDATE"+tbl_tabungan+" SET user = '"
-                    +tabungan.getUser()+"'"+",pass = '"
-                    +tabungan.getPass()+"'"+", saldo = "
-                    +tabungan.getSaldo()+"WHERE rekening ="+rek;
+            String sql = "DELETE FROM "+tbl_nasabah+"WHERE id ="+id;
             stmt.executeUpdate(sql);
         }
         catch(SQLException ex){
-            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(DaoNasabah.class.getName()).log(Level.SEVERE,null,ex);
         }
         closeConnection();
     }
     
-    public void delete(long rek){
-        openConnection();
-        try{
-            if(conn == null){
-                System.out.println("Conn is null");
-                return;                
-            }
-            stmt = conn.createStatement();
-            String sql = "DELETE FROM "+tbl_tabungan+"WHERE rekening ="+rek;
-            stmt.executeUpdate(sql);
-        }
-        catch(SQLException ex){
-            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
-        }
-        closeConnection();
-    }
-    
-    public Tabungan findByUser(Tabungan tabungan){
-        Tabungan new_tabungan = null;
-        openConnection();
-        try{
-            if(conn == null){
-                System.out.println("conn is null");
-                return null;                
-            }
-            stmt = conn.createStatement();
-            String sql = "SELECT * FROM "+ tbl_tabungan +" WHERE user='"+tabungan.getUser()+"'";
-            ResultSet rs = stmt.executeQuery(sql);
-            if(rs.first()){
-                long rekening = rs.getLong("rekening");
-                String user = rs.getString("user");
-                Integer pass = rs.getInt("pass");
-                long saldo = rs.getLong("saldo");
-                if(pass.equals(tabungan.getPass())){
-                    new_tabungan = new Tabungan(rekening,user,pass,saldo);
-                }
-                rs.close();
-            }
-        }
-        catch(SQLException ex){
-            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
-        }
-        closeConnection();
-        return new_tabungan;
-    }
-
-    public Tabungan findById(long rekening){
-        Tabungan tabungan = null;
+    public Nasabah findById(long id){
+        Nasabah nasabah = null;
         openConnection();
         try{
             if(conn == null){
@@ -153,14 +102,11 @@ public class DaoTabungan {
                 return null;                
             }
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM "+tbl_tabungan+" WHERE rekening="+rekening;
+            String sql = "SELECT * FROM "+tbl_nasabah+" WHERE id="+id;
             ResultSet rs = stmt.executeQuery(sql);
             if(rs.first()){
-                long nid = rs.getLong("rekening");
-                String user = rs.getString("user");
-                Integer pass = rs.getInt("pass");
-                long saldo = rs.getLong("saldo");
-                tabungan = new Tabungan(nid,user,pass,saldo);
+                long nid = rs.getLong("id");
+                nasabah = new Nasabah(nid);
                 rs.close();
             }
         }
@@ -168,7 +114,7 @@ public class DaoTabungan {
             Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
         }
         closeConnection();
-        return tabungan;
+        return nasabah;
     }
 
     public void create_database(){
@@ -211,12 +157,9 @@ public class DaoTabungan {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             stmt = conn.createStatement();
-            String sql = "CREATE TABLE IF NOT EXISTS "+tbl_tabungan+" "
-                    +"(rekening INTEGER NOT NULL AUTO_INCREMENT, "
-                    +" user VARCHAR(255), "
-                    +" pass BIGINT, "
-                    +" saldo BIGINT, "
-                    +" PRIMARY KEY ( rekening ))";
+            String sql = "CREATE TABLE IF NOT EXISTS "+tbl_nasabah+" "
+                    +"(id INTEGER NOT NULL AUTO_INCREMENT, "
+                    +" PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
         }
         catch(SQLException se){

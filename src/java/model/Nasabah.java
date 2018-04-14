@@ -37,6 +37,4 @@ public class Nasabah {
     public void setListTabungan(List<Tabungan> listTabungan) {
         this.listTabungan = listTabungan;
     }
-    
-    
 }
