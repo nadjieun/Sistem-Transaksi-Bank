@@ -31,5 +31,7 @@ public class ServiceTabungan {
         daoTabungan.update(rekening, tabungan);
     }
     
-    
+    public void delete(Tabungan tabungan){
+        daoTabungan.delete(tabungan.getRekening());
+    }
 }

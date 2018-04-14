@@ -11,22 +11,22 @@ import model.Tabungan;
  * @author Rachmad
  */
 public class Nasabah {
-    private long id;
+    private Long id;
     private List<Tabungan> listTabungan;
 
     public Nasabah(){
         
     }
     
-    public Nasabah(long id) {
+    public Nasabah(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

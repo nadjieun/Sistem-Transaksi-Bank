@@ -10,8 +10,8 @@ package model;
  * @author Rachmad
  */
 public class Tabungan {
-    private long rekening;
-    private long saldo;
+    private Long rekening;
+    private Long saldo;
     private String user;
     private int pass;
     
@@ -19,26 +19,26 @@ public class Tabungan {
         
     }
     
-    public Tabungan(long rekening, String user, int pass, long saldo){
+    public Tabungan(Long rekening, String user, int pass, long saldo){
         this.rekening = rekening;
         this.user = user;
         this.pass = pass;
         this.saldo = saldo;
     }
 
-    public long getRekening() {
+    public Long getRekening() {
         return rekening;
     }
 
-    public void setRekening(long rekening) {
+    public void setRekening(Long rekening) {
         this.rekening = rekening;
     }
 
-    public long getSaldo() {
+    public Long getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(long saldo) {
+    public void setSaldo(Long saldo) {
         this.saldo = saldo;
     }
 
