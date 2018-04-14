@@ -5,6 +5,7 @@
  */
 package dao_impl;
 
+import dao.DaoApp;
 import java.sql.Connection;
 import model.Nasabah;
 import java.sql.DriverManager;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Rachmad
  */
-public class DaoNasabah {
+public class DaoNasabah implements DaoApp<Nasabah, Long>{
     public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     public static final String DB_Name = "bank_nr";
     public static final String DB_URL = "jdbc:mysql://localhost/"+DB_Name;
@@ -56,6 +57,7 @@ public class DaoNasabah {
         }
     }
     
+    @Override
     public void save(Nasabah nasabah){
         openConnection();
         try{
@@ -75,8 +77,9 @@ public class DaoNasabah {
         }
         closeConnection();
     }
-        
-    public void delete(long id){
+    
+    @Override
+    public void delete(Long id){
         openConnection();
         try{
             if(conn == null){
@@ -93,7 +96,8 @@ public class DaoNasabah {
         closeConnection();
     }
     
-    public Nasabah findById(long id){
+    @Override
+    public Nasabah findById(Long id){
         Nasabah nasabah = null;
         openConnection();
         try{
@@ -159,6 +163,7 @@ public class DaoNasabah {
             stmt = conn.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS "+tbl_nasabah+" "
                     +"(id INTEGER NOT NULL AUTO_INCREMENT, "
+                    +" user VARCHAR(255), "
                     +" PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
         }

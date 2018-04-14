@@ -9,6 +9,8 @@ package dao;
  *
  * @author USER
  */
-public interface DaoApp {
-    
+public interface DaoApp<M, ID> {
+    public void save(M m);
+    public void delete(ID id);
+    public M findById(ID id);
 }
