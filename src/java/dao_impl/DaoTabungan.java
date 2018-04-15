@@ -67,8 +67,9 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
             }
             stmt = conn.createStatement();
             String sql = "INSERT INTO "+tbl_tabungan
-                    +" (user,pass,saldo)"
+                    +" (rekening,user,pass,saldo)"
                     +"VALUES ("
+                    +""+tabungan.getRekening()+", "
                     +"'"+tabungan.getUser()+"'"
                     +", "+tabungan.getPass()+", "
                     +tabungan.getSaldo()+")";
@@ -216,7 +217,7 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             stmt = conn.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS "+tbl_tabungan+" "
-                    +"(rekening INTEGER NOT NULL AUTO_INCREMENT, "
+                    +"(rekening INTEGER, "
                     +" user VARCHAR(255), "
                     +" pass BIGINT, "
                     +" saldo BIGINT, "

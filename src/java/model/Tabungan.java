@@ -19,6 +19,11 @@ public class Tabungan {
         
     }
     
+    public Tabungan(String user, int pass, long saldo){
+        this.user = user;
+        this.pass = pass;
+        this.saldo = saldo;
+    }
     public Tabungan(Long rekening, String user, int pass, long saldo){
         this.rekening = rekening;
         this.user = user;
