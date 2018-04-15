@@ -10,7 +10,11 @@ package model;
  * @author Rachmad
  */
 public class TransaksiOffline extends SystemTransaksi {
-    Tabungan tabungan;
+    
+    public TransaksiOffline(Tabungan tabungan){
+        super(tabungan);
+    }
+    
     public boolean simpan(long nominal){
         tabungan.setSaldo(tabungan.getSaldo()+nominal);
         return true;

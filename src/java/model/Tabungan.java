@@ -26,6 +26,11 @@ public class Tabungan {
         this.saldo = saldo;
     }
 
+    public Tabungan(Long rekening) {
+        this.rekening = rekening;
+    }
+    
+
     public Long getRekening() {
         return rekening;
     }

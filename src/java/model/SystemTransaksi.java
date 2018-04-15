@@ -12,19 +12,22 @@ import singleton.SingletonApp;
  * @author Rachmad
  */
 public class SystemTransaksi {
-    private Tabungan tabungan;
-    private Tabungan tabungan2;
-    DaoTabungan daoTabungan;
+    Tabungan tabungan;
     SingletonApp singletonApp;
+
+    public SystemTransaksi(Tabungan tabungan, SingletonApp singletonApp) {
+        this.tabungan = new Tabungan();
+        this.singletonApp = new SingletonApp();
+    }
     
     public boolean transfer(Long nominal, Long rekTujuan){
         if(tabungan.getSaldo() - nominal >= 0){
-            tabungan.setSaldo(tabungan.getSaldo()-nominal);
-            singletonApp.getInstance();
-            singletonApp.getServiceTabungan();
-            tabungan2 = daoTabungan.findById(rekTujuan);
-            tabungan2.setSaldo(tabungan2.getSaldo()+nominal);
-            return true;
+             Tabungan tabungan2 = singletonApp.getInstance().getServiceTabungan().login(new Tabungan(rekTujuan));
+            if(tabungan2 != null){
+                tabungan.setSaldo(tabungan.getSaldo()-nominal);
+                tabungan2.setSaldo(tabungan2.getSaldo()+nominal);
+                return true;
+            }
         }
         return false;
     }
