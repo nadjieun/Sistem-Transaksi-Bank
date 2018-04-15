@@ -6,6 +6,7 @@
 package service;
 import model.Tabungan;
 import dao_impl.DaoTabungan;
+import java.util.List;
 /**
  *
  * @author Rachmad
@@ -33,5 +34,9 @@ public class ServiceTabungan {
     
     public void delete(Tabungan tabungan){
         daoTabungan.delete(tabungan.getRekening());
+    }
+    
+    public List<Tabungan> findAll(){
+        return daoTabungan.findAll();
     }
 }

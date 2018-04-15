@@ -176,6 +176,37 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
         return tabungan;
     }
 
+    public List<Tabungan> findAll(){
+        Tabungan tabungan = null;
+        List<Tabungan> listTabungan = new ArrayList<Tabungan>();
+        openConnection();
+        try{
+            if(conn == null){
+                System.out.println("Conn is null");
+                return null;                
+            }
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM "+tbl_tabungan;
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.first();
+                while(!rs.isAfterLast()){
+                    long nid = rs.getLong("rekening");
+                    String user = rs.getString("user");
+                    Integer pass = rs.getInt("pass");
+                    long saldo = rs.getLong("saldo");
+                    tabungan = new Tabungan(nid,user,pass,saldo);
+                    listTabungan.add(tabungan);
+                    rs.next();
+                }
+            rs.close();
+        }
+        catch(SQLException ex){
+            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        closeConnection();
+        return listTabungan;
+    }
+    
     public void create_database(){
         Connection conn = null;
         Statement stmt = null;

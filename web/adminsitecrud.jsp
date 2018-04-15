@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import= "model.Tabungan" %>
+<%@page import= "singleton.SingletonApp" %>
+<%@page import= "java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,10 +15,25 @@
         <title>Bank Krut</title>
     </head>
     <body>
-        <h1>Selamat Datang di Admin Site Bank Krut</h1>
-        <br>
-        <form>
-            
-        </form>
+        <h1>Daftar semua Tabungan</h1>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>NAMA</td>
+                <td>PASS</td>
+                <td>SALDO</td>
+            </tr>
+            <%
+                SingletonApp singletonApp = new SingletonApp();
+                List<Tabungan> listTabungan = singletonApp.getServiceTabungan().findAll();
+                for(Tabungan n : listTabungan){%>
+            <tr>
+                <td><%out.print(n.getRekening());%></td>
+                <td><%out.print(n.getUser());%></td>
+                <td><%out.print(n.getPass());%></td>
+                <td><%out.println(n.getSaldo());%></td>
+            </tr>
+            <%}%>
+        </table>    
     </body>
 </html>
