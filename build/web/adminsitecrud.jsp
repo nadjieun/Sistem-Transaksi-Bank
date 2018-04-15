@@ -22,6 +22,7 @@
                 <td>NAMA</td>
                 <td>PASS</td>
                 <td>SALDO</td>
+                <td>ATM</td>
             </tr>
             <%
                 SingletonApp singletonApp = new SingletonApp();
@@ -34,6 +35,7 @@
                 <td><%out.println(n.getSaldo());%></td>
                 <td><a href="editTabungan.jsp">edit</a></td>
                 <td><a href="deleteTabungan.jsp">delete</a></td>
+                <td><a href="createATM.jsp">create atm</a></td>
             </tr>
             <%}%>
         </table>    

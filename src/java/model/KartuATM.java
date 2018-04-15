@@ -10,6 +10,8 @@ package model;
  * @author USER
  */
 public class KartuATM {
+
+    public static String TipeKartu;
     public enum TipeKartu{
         SILVER(3000000, "Silver"), 
         GOLD(30000000, "Gold"), 
@@ -18,11 +20,11 @@ public class KartuATM {
         private String strKartu;
         private int intKartu;
 
-        private TipeKartu(String strKartu) {
+        TipeKartu(String strKartu) {
             this.strKartu = strKartu;
         }
         
-        private TipeKartu(int intKartu, String strKartu) {
+        TipeKartu(int intKartu, String strKartu) {
             this.intKartu = intKartu;
             this.strKartu = strKartu;
         }

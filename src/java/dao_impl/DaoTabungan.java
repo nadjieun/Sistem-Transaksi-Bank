@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.KartuATM;
 import model.Nasabah;
 
 /**
@@ -206,6 +207,26 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
         closeConnection();
         return listTabungan;
     }
+
+    public void createATM(Long rek, String tipeKartu){
+        openConnection();
+        try{
+            if(conn == null){
+                System.out.println("conn is null");
+                return;                
+            }
+            stmt = conn.createStatement();
+            String sql = "UPDATE "+tbl_tabungan
+                    +" SET atm='"
+                    +tipeKartu
+                    +"' WHERE rekening="+rek;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException ex){
+            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        closeConnection();
+    }
     
     public void create_database(){
         Connection conn = null;
@@ -252,6 +273,7 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
                     +" user VARCHAR(255), "
                     +" pass BIGINT, "
                     +" saldo BIGINT, "
+                    +" atm VARCHAR(255), "
                     +" PRIMARY KEY ( rekening ))";
             stmt.executeUpdate(sql);
         }

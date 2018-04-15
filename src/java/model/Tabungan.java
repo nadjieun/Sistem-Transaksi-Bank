@@ -10,6 +10,31 @@ package model;
  * @author Rachmad
  */
 public class Tabungan {
+    public enum TipeKartu{
+        SILVER(3000000, "Silver"), 
+        GOLD(30000000, "Gold"), 
+        PLATINUM(300000000, "Platinum");
+
+        private String strKartu;
+        private int intKartu;
+
+        TipeKartu(String strKartu) {
+            this.strKartu = strKartu;
+        }
+        
+        TipeKartu(int intKartu, String strKartu) {
+            this.intKartu = intKartu;
+            this.strKartu = strKartu;
+        }
+
+        public String getStringValue() {
+            return strKartu;
+        }
+
+        public int getIntValue() {
+            return intKartu;
+        }
+    }
     private Long rekening;
     private Long saldo;
     private String user;

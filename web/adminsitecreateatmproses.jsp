@@ -4,16 +4,17 @@
     Author     : USER
 --%>
 
+<%@page import="model.Nasabah"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="model.KartuATM"%>
+<%@page import= "model.KartuATM" %>
 <%--<%@page import="service.ServiceNasabah"%>--%>
 <%@page import="singleton.SingletonApp"%>
 <!DOCTYPE html>
 <%
     String tipe = request.getParameter("tipekartu");
-    Nasabah nasabah = new Nasabah(idnasabah);
+    KartuATM kartuATM = new KartuATM(KartuATM.TipeKartu);
+    
     SingletonApp singletonApp = new SingletonApp();
-    Nasabah nasabah2 = singletonApp.getServiceNasabah().login(nasabah);
     
     if (nasabah2 == null){
         singletonApp.getInstance().getServiceNasabah().register(nasabah);

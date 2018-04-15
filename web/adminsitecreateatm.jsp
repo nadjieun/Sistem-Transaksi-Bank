@@ -14,7 +14,7 @@
     <body>
         <h1>Register Kartu ATM</h1>
         <br>
-        <form action="adminsitecreatenasabahproses.jsp">
+        <form action="adminsitecreateatmproses.jsp">
             <table>
                 <tr>
                     <td>Pilihan</td>

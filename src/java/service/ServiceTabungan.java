@@ -39,4 +39,8 @@ public class ServiceTabungan {
     public List<Tabungan> findAll(){
         return daoTabungan.findAll();
     }
+    
+    public void createATM(Long rekening,String tipeKartu){
+        daoTabungan.createATM(rekening,tipeKartu);
+    }
 }
