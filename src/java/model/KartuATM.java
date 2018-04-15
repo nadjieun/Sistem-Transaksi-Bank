@@ -9,18 +9,37 @@ package model;
  *
  * @author USER
  */
-public enum KartuATM {
-    SILVER("3000000"), 
-    GOLD("5000000"), 
-    PLATINUM("10000000");
-    
-    private String maxNominal;
+public class KartuATM {
+    public enum TipeKartu{
+        SILVER(3000000, "Silver"), 
+        GOLD(30000000, "Gold"), 
+        PLATINUM(300000000, "Platinum");
 
-    KartuATM(String maxNominal) {
-        this.maxNominal = maxNominal;
+        private String strKartu;
+        private int intKartu;
+
+        private TipeKartu(String strKartu) {
+            this.strKartu = strKartu;
+        }
+        
+        private TipeKartu(int intKartu, String strKartu) {
+            this.intKartu = intKartu;
+            this.strKartu = strKartu;
+        }
+
+        public String getStringValue() {
+            return strKartu;
+        }
+
+        public int getIntValue() {
+            return intKartu;
+        }
     }
-
-    public String maxNominal() {
-        return maxNominal;
+    
+    private TipeKartu tipe;
+    private Tabungan tabungan = new Tabungan();
+    
+    public KartuATM(Tabungan tabungan){
+        this.tabungan = tabungan;
     }
 }
