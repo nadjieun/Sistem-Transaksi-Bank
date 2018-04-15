@@ -32,6 +32,8 @@
                 <td><%out.print(n.getUser());%></td>
                 <td><%out.print(n.getPass());%></td>
                 <td><%out.println(n.getSaldo());%></td>
+                <td><a href="editTabungan.jsp">edit</a></td>
+                <td><a href="deleteTabungan.jsp">delete</a></td>
             </tr>
             <%}%>
         </table>    

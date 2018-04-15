@@ -1,6 +1,6 @@
 <%-- 
-    Document   : admincreatetabungan
-    Created on : Apr 15, 2018, 10:56:50 AM
+    Document   : editTabungan
+    Created on : Apr 15, 2018, 8:26:51 PM
     Author     : Rachmad
 --%>
 
@@ -12,8 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Silahkan mengisi form di bawah ini untuk membuat tabungan baru</h1>
-        <form action="adminSiteCreateTabunganLogic.jsp">
+        <h1>Silahkan mengisi form di bawah ini untuk mengedit tabungan</h1>
+        <form action="editTabunganLogic.jsp">
             <table>
                 <tr>
                     <td>No. Rekening</td>

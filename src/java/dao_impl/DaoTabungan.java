@@ -81,7 +81,7 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
         closeConnection();
     }
     
-    public void update(long rek, Tabungan tabungan){
+    public void update(Long rek, Tabungan tabungan){
         openConnection();
         try{
             if(conn == null){
@@ -89,10 +89,10 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
                 return;                
             }
             stmt = conn.createStatement();
-            String sql = "UPDATE"+tbl_tabungan+" SET user = '"
-                    +tabungan.getUser()+"'"+",pass = '"
-                    +tabungan.getPass()+"'"+", saldo = "
-                    +tabungan.getSaldo()+"WHERE rekening ="+rek;
+            String sql = "UPDATE "+tbl_tabungan+" SET user ='"
+                    +tabungan.getUser()+"'"+", pass ="
+                    +tabungan.getPass()+", saldo ="
+                    +tabungan.getSaldo()+" WHERE rekening ="+rek;
             stmt.executeUpdate(sql);
         }
         catch(SQLException ex){
@@ -110,7 +110,7 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
                 return;                
             }
             stmt = conn.createStatement();
-            String sql = "DELETE FROM "+tbl_tabungan+"WHERE rekening ="+rekening;
+            String sql = "DELETE FROM "+tbl_tabungan+" WHERE rekening ="+rekening;
             stmt.executeUpdate(sql);
         }
         catch(SQLException ex){
