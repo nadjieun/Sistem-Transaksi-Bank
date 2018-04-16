@@ -5,45 +5,37 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import= "model.Tabungan"%>
-<%@page import= "singleton.SingletonApp"%>
+<%@page import="model.Tabungan"%>
+<%@page import="model.TransaksiOffline"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bank Krut(ATM)</title>
+        <title>Bank Krut(Teller)</title>
     </head>
     <body>
 <%
-    Long norek = Long.parseLong(request.getParameter("norek"));
+    int idKartu = Integer.parseInt(request.getParameter("idkartu"));
     int pass = Integer.parseInt(request.getParameter("password"));
-    SingletonApp singleton = new SingletonApp();
-    Tabungan tabungan = new Tabungan(norek,"user",pass,0);
-    if (singleton.getServiceTabungan().login(tabungan) != null){%>
-        <h1>Selamat Datang di ATM</h1>
-        <br>
-        <h2>Silahkan Memilih Transaksi</h2>
-        <br>
-        <form>
-            <button><a href="transaksioffline_transfer.jsp">Transfer</a></button>
-            <button><a href="transaksioffline_ceksaldo.jsp">Cek Saldo</a></button>
-            <button><a href="transaksioffline_tariktunai.jsp">Tarik Tunai</a></button>
-            <button><a href="transaksioffline_setoruang.jsp">Setor Uang</a></button>
-        </form>
     
-<%    
-    } else if(singleton.getServiceTabungan().findByUser(tabungan) == null){
+    Tabungan tabungan = new Tabungan(0L, "us", pass, 0L,"lala",idKartu);
+    TransaksiOffline transaksi = new TransaksiOffline(tabungan);
+    
+    if (transaksi.loginATM(idKartu, pass)){
+        session.setAttribute("tabungan", transaksi.getTabungan());
+        response.sendRedirect("atmmenu.jsp");
+    } else {
 %>
-    
-        <h1>User Tidak Ada</h1>
+        <h1>User Tidak Ada atau Password Salah</h1>
         <br>
         <h5>Silahkan mengulang kembali</h5>
         <br>
         <form>
-            <button><a href="transaksionline.jsp">Kembali</a></button>
+            <button><a href="atmform.jsp">Kembali</a></button>
         </form>
 <%    
     }
 %>
+
     </body>
 </html>

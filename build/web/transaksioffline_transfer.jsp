@@ -9,9 +9,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Bank Krut(Offline)</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="transaksioffline_transferproses.jsp">
+            <table>
+                <tr>
+                    <td>Masukkan No Rekening Tujuan</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="rektujuan"></td>
+                </tr>
+                <br>
+                <tr>
+                    <td>Masukkan Jumlah Uang yang Ingin di Transfer</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="uangtransfer"></td>
+                </tr>
+            </table>
+            <button type="submit">Kirim</button>
+        </form>
     </body>
 </html>

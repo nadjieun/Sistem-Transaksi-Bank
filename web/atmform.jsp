@@ -17,9 +17,9 @@
         <form action="atmformproses.jsp">
             <table>
                 <tr>
-                    <td>No Rek</td>
+                    <td>ID Kartu</td>
                     <td>:</td>
-                    <td><input type="text" name="norek"></td>
+                    <td><input type="text" name="idkartu"></td>
                     <td>Password</td>
                     <td>:</td>
                     <td><input type="text" name="password"></td>

@@ -5,9 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="model.Nasabah"%>
 <%@page import="model.Tabungan"%>
-<%@page import="singleton.SingletonApp"%>
+<%@page import="model.TransaksiOffline"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,18 +14,43 @@
         <title>Bank Krut(Online)</title>
     </head>
     <body>
-        <h1>Transfer</h1>
 <%
-    String trf = request.getParameter("uangtransfer");
-    Long transfer = Long.parseLong(trf);
-    SingletonApp singletonApp = new SingletonApp();
+    Long rektujuan = Long.parseLong(request.getParameter("rektujuan"));
+    Long uangtransfer = Long.parseLong(request.getParameter("uangtransfer"));
+    Tabungan tabungan = (Tabungan) session.getAttribute("tabungan");
+    TransaksiOffline transaksi = new TransaksiOffline(tabungan);
     
-    while(true){
-        if (singletonApp.getServiceATM())
-    }
-    
+    if (transaksi.transfer(uangtransfer, rektujuan)== true){
 %>
-
-        <button><a href="adminsitecreate.jsp">Kembali</a></button>
+        <h1>Transaksi Berhasil</h1>
+        <br>
+        <h2>Saldo anda sekarang</h2>
+        <br>
+        <%
+            out.print(transaksi.cekSaldo());
+        %>
+        <br>
+        <form>
+            <button><a href="tellermenu.jsp">Kembali ke menu utama</a></button>
+            <button><a href="usersite.jsp">Keluar</a></button>
+        </form>
+<%    
+    } else{   
+%>
+        <h1>Transaksi Gagal</h1>
+        <br>
+        <h2>Saldo anda sekarang</h2>
+        <br>
+        <%
+            out.print(transaksi.cekSaldo());
+        %>
+        <br>
+        <form>
+            <button><a href="transaksionlinemenu.jsp">Kembali ke menu utama</a></button>
+            <button><a href="usersite.jsp">Keluar</a></button>
+        </form>
+<%    
+    }   
+%>        
     </body>
 </html>

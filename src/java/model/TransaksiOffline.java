@@ -15,14 +15,15 @@ public class TransaksiOffline extends SystemTransaksi {
         super(tabungan);
     }
     
-    public boolean simpan(long nominal){
+    public void simpan(Long nominal){
         tabungan.setSaldo(tabungan.getSaldo()+nominal);
-        return true;
     }
     
-    public boolean ambil(long nominal){
+    public boolean ambil(Long nominal){
         if(tabungan.getSaldo()-nominal >= 0){
             tabungan.setSaldo(tabungan.getSaldo()- nominal);
+            singletonApp.getServiceTabungan().update(tabungan.getRekening(), tabungan, 
+                tabungan.getUser(), tabungan.getPass());
             return true;
         }
         return false;

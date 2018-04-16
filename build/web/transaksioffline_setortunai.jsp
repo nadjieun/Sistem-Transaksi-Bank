@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bank Krut(Teller)</title>
+        <title>Bank Krut(Offline)</title>
     </head>
     <body>
         <form action="transaksioffline_setortunaiproses.jsp">

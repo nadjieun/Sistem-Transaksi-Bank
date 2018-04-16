@@ -20,6 +20,10 @@
                     <td><input type="text" name="rekening"></td>
                 </tr>
                 <tr>
+                    <td>ID Kartu</td>
+                    <td><input type="text" name="idkartu"></td>
+                </tr>
+                <tr>
                     <td></td>
                     <td><button type="submit"> submit </button></td>
                 </tr>

@@ -9,39 +9,28 @@ package model;
  *
  * @author USER
  */
-public class KartuATM {
+public enum KartuATM {
+    SILVER(1000000L, "Silver"), 
+    GOLD(5000000L, "Gold"), 
+    PLATINUM(10000000L, "Platinum");
 
-    public static String TipeKartu;
-    public enum TipeKartu{
-        SILVER(3000000, "Silver"), 
-        GOLD(30000000, "Gold"), 
-        PLATINUM(300000000, "Platinum");
+    private String strKartu;
+    private Long longKartu;
 
-        private String strKartu;
-        private int intKartu;
-
-        TipeKartu(String strKartu) {
-            this.strKartu = strKartu;
-        }
-        
-        TipeKartu(int intKartu, String strKartu) {
-            this.intKartu = intKartu;
-            this.strKartu = strKartu;
-        }
-
-        public String getStringValue() {
-            return strKartu;
-        }
-
-        public int getIntValue() {
-            return intKartu;
-        }
+    KartuATM(String strKartu) {
+        this.strKartu = strKartu;
     }
-    
-    private TipeKartu tipe;
-    private Tabungan tabungan = new Tabungan();
-    
-    public KartuATM(Tabungan tabungan){
-        this.tabungan = tabungan;
+
+    KartuATM(Long longKartu, String strKartu) {
+        this.longKartu = longKartu;
+        this.strKartu = strKartu;
+    }
+
+    public String getStringValue() {
+        return strKartu;
+    }
+
+    public Long getLongValue() {
+        return longKartu;
     }
 }

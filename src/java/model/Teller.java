@@ -12,8 +12,8 @@ package model;
 public class Teller extends TransaksiOffline{
     private String namaTeller;
 
-    public Teller(String namaTeller) {
-        this.namaTeller = namaTeller;
+    public Teller(Tabungan tabungan) {
+        super(tabungan);
     }
 
     public String getNamaTeller() {

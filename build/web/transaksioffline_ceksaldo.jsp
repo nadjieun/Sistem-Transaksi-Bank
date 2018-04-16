@@ -11,16 +11,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bank Krut(Teller)</title>
+        <title>Bank Krut(Offline)</title>
     </head>
     <body>
 <%
     Tabungan tabungan = (Tabungan) session.getAttribute("tabungan");
+    TransaksiOffline transaksi = new TransaksiOffline(tabungan);
+    
 %>
         <h1>Saldo anda</h1>
         <br>
         <%
-            out.print(tabungan.getSaldo());
+            out.print(transaksi.cekSaldo());
         %>
         <br>
         <form>

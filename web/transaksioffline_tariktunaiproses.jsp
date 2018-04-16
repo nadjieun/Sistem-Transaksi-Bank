@@ -6,26 +6,24 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Tabungan"%>
-<%@page import="singleton.SingletonApp,java.io.*,java.util.*"%>
+<%@page import="model.TransaksiOffline"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bank Krut(Teller)</title>
+        <title>Bank Krut(Offline)</title>
     </head>
     <body>
 <%
     Long uangambil = Long.parseLong(request.getParameter("uangambil"));
     Tabungan tabungan = (Tabungan) session.getAttribute("tabungan");
+    TransaksiOffline transaksi = new TransaksiOffline(tabungan);
+    String atm;
     
-    if (tabungan.getSaldo() >= uangambil){
-        uangambil = tabungan.getSaldo() - uangambil;
-        tabungan.setSaldo(uangambil);
-        SingletonApp singletonApp = new SingletonApp();
-
-        singletonApp.getServiceTabungan().update(tabungan.getRekening(), tabungan, 
-                tabungan.getUser(), tabungan.getPass());
-     
+    String teller;
+    
+    
+    if (transaksi.ambil(uangambil) == true){
 %>
         <h1>Transaksi Berhasil</h1>
         <br>
@@ -42,10 +40,12 @@
 <%    
     } else{   
 %>
-        <h1>Saldo anda sekarang</h1>
+        <h1>Transaksi Gagal</h1>
+        <br>
+        <h2>Saldo anda sekarang</h2>
         <br>
         <%
-            out.print(tabungan.getSaldo());
+            out.print(transaksi.cekSaldo());
         %>
         <br>
         <form>

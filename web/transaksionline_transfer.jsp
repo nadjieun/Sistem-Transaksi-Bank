@@ -14,8 +14,15 @@
     <body>
         <h1>Selamat Datang di Bank Krut</h1>
         <br>
-        <form action="transaksionline.jsp">
+        <form action="transaksionline_transferproses.jsp">
             <table>
+                <tr>
+                    <td>Masukkan No Rekening Tujuan</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="rektujuan"></td>
+                </tr>
+                <br>
                 <tr>
                     <td>Masukkan Jumlah Uang yang Ingin di Transfer</td>
                 </tr>

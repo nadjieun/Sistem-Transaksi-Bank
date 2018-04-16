@@ -12,18 +12,15 @@ import service.ServiceTabungan;
  * @author Rachmad
  */
 public class TransaksiOnline extends SystemTransaksi {
-    Tabungan tabungan;
-    Tabungan tabungan2;
-    ServiceTabungan serviceTabungan;
+    public TransaksiOnline(Tabungan tabungan){
+        super(tabungan);
+    }
     
-    
-    public boolean transfer(long nominal, Long rekTujuan, Integer token){
-        if(token.equals(tabungan.getPass())){
-            if(tabungan.getSaldo()-nominal >= 0){
-                if(tabungan2.getRekening().equals(rekTujuan)){
-                    tabungan.setSaldo(tabungan.getSaldo()-nominal);
-                    serviceTabungan.login(tabungan2);
-                    tabungan2.setSaldo(tabungan2.getSaldo()+nominal);
+    public boolean login(String user, int pass){
+        tabungan = singletonApp.getInstance().getServiceTabungan().findByUser(tabungan);
+        if(tabungan != null){
+            if(user.equals(tabungan.getUser())){
+                if(tabungan.getPass() ==  pass){
                     return true;
                 }
             }

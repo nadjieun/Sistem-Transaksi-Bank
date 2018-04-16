@@ -1,6 +1,6 @@
 <%-- 
-    Document   : transaksioffline_tariktunai
-    Created on : Apr 16, 2018, 7:04:25 PM
+    Document   : transaksioffline_tariktunaiatm
+    Created on : Apr 17, 2018, 12:06:38 AM
     Author     : USER
 --%>
 
@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bank Krut(Teller)</title>
+        <title>Bank Krut(Offline)</title>
     </head>
     <body>
-        <form action="transaksioffline_setortunaiproses.jsp">
+        <form action="transaksioffline_tariktunaiproses.jsp">
             <table>
                 <tr>
                     <td>Masukkan Jumlah Uang yang Ingin di Ambil</td>

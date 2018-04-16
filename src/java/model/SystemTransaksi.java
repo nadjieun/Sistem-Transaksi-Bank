@@ -15,6 +15,10 @@ public class SystemTransaksi {
     Tabungan tabungan;
     SingletonApp singletonApp;
 
+    public Tabungan getTabungan() {
+        return tabungan;
+    }
+    
     public SystemTransaksi(Tabungan tabungan) {
         this.tabungan = tabungan;
         this.singletonApp = new SingletonApp();
@@ -26,6 +30,10 @@ public class SystemTransaksi {
             if(tabungan2 != null){
                 tabungan.setSaldo(tabungan.getSaldo()-nominal);
                 tabungan2.setSaldo(tabungan2.getSaldo()+nominal);
+                singletonApp.getServiceTabungan().update(tabungan.getRekening(), tabungan,
+                        tabungan.getUser(), tabungan.getPass());
+                singletonApp.getServiceTabungan().update(tabungan2.getRekening(), tabungan2,
+                        tabungan2.getUser(), tabungan2.getPass());
                 return true;
             }
         }
@@ -37,11 +45,28 @@ public class SystemTransaksi {
         return tmp;
     }
     
-    public boolean login(String user, String pass){
-        if(user.equals(tabungan.getUser())){
-            if(pass.equals(tabungan.getPass()))
-                return true;
+    public boolean login(Long norek, int pass){
+        tabungan = singletonApp.getInstance().getServiceTabungan().login(tabungan);
+        if(tabungan != null){
+            if(norek == tabungan.getRekening()){
+                if(tabungan.getPass() ==  pass){
+                    return true;
+                }
+            }
         }
         return false;
     }
+    
+    public boolean loginATM(int idKartu, int pass){
+        tabungan = singletonApp.getInstance().getServiceTabungan().loginATM(tabungan);
+        if(tabungan != null){
+            if(idKartu == tabungan.getIdKartu()){
+                if(tabungan.getPass() ==  pass){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
 }

@@ -40,11 +40,15 @@ public class ServiceTabungan {
         return daoTabungan.findAll();
     }
     
-    public void createATM(Long rekening,String tipeKartu){
-        daoTabungan.createATM(rekening,tipeKartu);
+    public void createATM(Long rekening,String tipeKartu, int idKartu){
+        daoTabungan.createATM(rekening,tipeKartu,idKartu);
     }
     
     public Tabungan findByUser(Tabungan tabungan){
         return daoTabungan.findByUser(tabungan);
+    }
+    
+    public Tabungan loginATM(Tabungan tabungan){
+        return daoTabungan.findKartuId(tabungan.getIdKartu());
     }
 }

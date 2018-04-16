@@ -136,8 +136,10 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
                 String user = rs.getString("user");
                 Integer pass = rs.getInt("pass");
                 long saldo = rs.getLong("saldo");
+                String tipe = rs.getString("atm");
+                int idKartu = rs.getInt("id_kartu");
                 if(pass.equals(tabungan.getPass())){
-                    new_tabungan = new Tabungan(rekening,user,pass,saldo);
+                    new_tabungan = new Tabungan(rekening,user,pass,saldo,tipe,idKartu);
                 }
                 rs.close();
             }
@@ -166,7 +168,38 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
                 String user = rs.getString("user");
                 Integer pass = rs.getInt("pass");
                 long saldo = rs.getLong("saldo");
-                tabungan = new Tabungan(nid,user,pass,saldo);
+                String tipe = rs.getString("atm");
+                int idKartu = rs.getInt("id_kartu");
+                tabungan = new Tabungan(nid,user,pass,saldo,tipe,idKartu);
+                rs.close();
+            }
+        }
+        catch(SQLException ex){
+            Logger.getLogger(DaoTabungan.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        closeConnection();
+        return tabungan;
+    }
+    
+    public Tabungan findKartuId(int id){
+        Tabungan tabungan = null;
+        openConnection();
+        try{
+            if(conn == null){
+                System.out.println("Conn is null");
+                return null;                
+            }
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM "+tbl_tabungan+" WHERE id_kartu=" + id;
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.first()){
+                long nid = rs.getLong("rekening");
+                String user = rs.getString("user");
+                Integer pass = rs.getInt("pass");
+                long saldo = rs.getLong("saldo");
+                String tipe = rs.getString("atm");
+                int idKartu = rs.getInt("id_kartu");
+                tabungan = new Tabungan(nid,user,pass,saldo,tipe,idKartu);
                 rs.close();
             }
         }
@@ -195,7 +228,9 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
                     String user = rs.getString("user");
                     Integer pass = rs.getInt("pass");
                     long saldo = rs.getLong("saldo");
-                    tabungan = new Tabungan(nid,user,pass,saldo);
+                    String tipe = rs.getString("atm");
+                    int idKartu = rs.getInt("id_kartu");
+                    tabungan = new Tabungan(nid,user,pass,saldo,tipe,idKartu);
                     listTabungan.add(tabungan);
                     rs.next();
                 }
@@ -208,7 +243,7 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
         return listTabungan;
     }
 
-    public void createATM(Long rek, String tipeKartu){
+    public void createATM(Long rek, String tipeKartu, int idKartu){
         openConnection();
         try{
             if(conn == null){
@@ -217,9 +252,12 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
             }
             stmt = conn.createStatement();
             String sql = "UPDATE "+tbl_tabungan
-                    +" SET atm='"
-                    +tipeKartu
-                    +"' WHERE rekening="+rek;
+                    + " SET atm='"
+                    + tipeKartu
+                    + "', id_kartu='"
+                    + idKartu
+                    + "'"
+                    + " WHERE rekening=" + rek;
             stmt.executeUpdate(sql);
         }
         catch(SQLException ex){
@@ -274,6 +312,7 @@ public class DaoTabungan implements DaoApp<Tabungan, Long>{
                     +" pass BIGINT, "
                     +" saldo BIGINT, "
                     +" atm VARCHAR(255), "
+                    +" id_kartu BIGINT, "
                     +" PRIMARY KEY ( rekening ))";
             stmt.executeUpdate(sql);
         }

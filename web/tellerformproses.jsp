@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Tabungan"%>
-<%@page import="singleton.SingletonApp,java.io.*,java.util.*"%>
+<%@page import="model.TransaksiOffline"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,27 +17,16 @@
 <%
     Long norek = Long.parseLong(request.getParameter("norek"));
     int pass = Integer.parseInt(request.getParameter("password"));
-    SingletonApp singleton = new SingletonApp();
-    Tabungan tabungan = new Tabungan(norek,"user",pass,0);
-    Tabungan new_tabungan = singleton.getServiceTabungan().login(tabungan);
-    if (new_tabungan != null && tabungan.getPass() == new_tabungan.getPass()){
-        session.setAttribute("tabungan", new_tabungan);
+    
+    Tabungan tabungan = new Tabungan(norek, "a", pass, 0L);
+    TransaksiOffline transaksi = new TransaksiOffline(tabungan);
+    
+    if (transaksi.login(norek, pass)){
+        session.setAttribute("tabungan", transaksi.getTabungan());
         response.sendRedirect("tellermenu.jsp");
-    } else if(new_tabungan == null){
+    } else {
 %>
-    
-        <h1>User Tidak Ada</h1>
-        <br>
-        <h5>Silahkan mengulang kembali</h5>
-        <br>
-        <form>
-            <button><a href="tellerform.jsp">Kembali</a></button>
-        </form>
-<%    
-    } else if(tabungan.getPass() != new_tabungan.getPass()){
-%>
-    
-        <h1>Password Salah</h1>
+        <h1>User Tidak Ada atau Password Salah</h1>
         <br>
         <h5>Silahkan mengulang kembali</h5>
         <br>

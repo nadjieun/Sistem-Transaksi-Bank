@@ -62,6 +62,9 @@ public final class tellerform_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <td>Password</td>\r\n");
       out.write("                    <td>:</td>\r\n");
       out.write("                    <td><input type=\"text\" name=\"password\"></td>\r\n");
+      out.write("                    <td>Nama Teller</td>\r\n");
+      out.write("                    <td>:</td>\r\n");
+      out.write("                    <td><input type=\"text\" name=\"namateller\"></td>\r\n");
       out.write("                </tr>\r\n");
       out.write("            </table>\r\n");
       out.write("            <button type=\"submit\">Login</button>\r\n");
