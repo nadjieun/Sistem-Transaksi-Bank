@@ -26,8 +26,6 @@
             </tr>
         </table>
             <button type="submit">Login</button>
-            <button><a href="transaksionline_transfer.jsp">Transfer</a></button>
-            <button><a href="transaksionline_ceksaldo.jsp">Cek Saldo</a></button>
         </form>
     </body>
 </html>

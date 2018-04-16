@@ -26,7 +26,7 @@ public class ServiceTabungan {
         daoTabungan.save(tabungan);
     }
     
-    public void update(long rekening, Tabungan tabungan, String newuser, int newpass){
+    public void update(Long rekening, Tabungan tabungan, String newuser, int newpass){
         tabungan.setUser(newuser);
         tabungan.setPass(newpass);
         daoTabungan.update(rekening, tabungan);

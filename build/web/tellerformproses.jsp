@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Tabungan"%>
-<%@page import="singleton.SingletonApp"%>
+<%@page import="singleton.SingletonApp,java.io.*,java.util.*"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,20 +19,11 @@
     int pass = Integer.parseInt(request.getParameter("password"));
     SingletonApp singleton = new SingletonApp();
     Tabungan tabungan = new Tabungan(norek,"user",pass,0);
-    if (singleton.getServiceTabungan().login(tabungan) != null){%>
-        <h1>Selamat Datang di Teller</h1>
-        <br>
-        <h2>Silahkan Memilih Transaksi</h2>
-        <br>
-        <form>
-            <button><a href="transaksioffline_transfer.jsp">Transfer</a></button>
-            <button><a href="transaksioffline_ceksaldo.jsp">Cek Saldo</a></button>
-            <button><a href="transaksioffline_tariktunai.jsp">Tarik Tunai</a></button>
-            <button><a href="transaksioffline_setoruang.jsp">Setor Uang</a></button>
-        </form>
-    
-<%    
-    } else if(singleton.getServiceTabungan().findByUser(tabungan) == null){
+    Tabungan new_tabungan = singleton.getServiceTabungan().login(tabungan);
+    if (new_tabungan != null && tabungan.getPass() == new_tabungan.getPass()){
+        session.setAttribute("tabungan", new_tabungan);
+        response.sendRedirect("tellermenu.jsp");
+    } else if(new_tabungan == null){
 %>
     
         <h1>User Tidak Ada</h1>
@@ -40,10 +31,22 @@
         <h5>Silahkan mengulang kembali</h5>
         <br>
         <form>
-            <button><a href="transaksionline.jsp">Kembali</a></button>
+            <button><a href="tellerform.jsp">Kembali</a></button>
+        </form>
+<%    
+    } else if(tabungan.getPass() != new_tabungan.getPass()){
+%>
+    
+        <h1>Password Salah</h1>
+        <br>
+        <h5>Silahkan mengulang kembali</h5>
+        <br>
+        <form>
+            <button><a href="tellerform.jsp">Kembali</a></button>
         </form>
 <%    
     }
 %>
+
     </body>
 </html>

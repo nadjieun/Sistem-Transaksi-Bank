@@ -15,8 +15,8 @@ public class SystemTransaksi {
     Tabungan tabungan;
     SingletonApp singletonApp;
 
-    public SystemTransaksi(Tabungan tabungan, SingletonApp singletonApp) {
-        this.tabungan = new Tabungan();
+    public SystemTransaksi(Tabungan tabungan) {
+        this.tabungan = tabungan;
         this.singletonApp = new SingletonApp();
     }
     

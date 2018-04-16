@@ -11,7 +11,7 @@ package model;
  */
 public class TransaksiOffline extends SystemTransaksi {
     
-    public TransaksiOffline(){
+    public TransaksiOffline(Tabungan tabungan){
         super(tabungan);
     }
     
