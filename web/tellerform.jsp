@@ -14,12 +14,12 @@
     <body>
         <h1>Selamat Datang di Bank Krut</h1>
         <br>
-        <form action="transaksiofflineteller.jsp">
+        <form action="tellerformproses.jsp">
             <table>
                 <tr>
                     <td>No. Rekening</td>
                     <td>:</td>
-                    <td><input type="text" name="rekening"></td>
+                    <td><input type="text" name="norek"></td>
                     <td>Password</td>
                     <td>:</td>
                     <td><input type="text" name="password"></td>

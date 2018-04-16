@@ -43,4 +43,8 @@ public class ServiceTabungan {
     public void createATM(Long rekening,String tipeKartu){
         daoTabungan.createATM(rekening,tipeKartu);
     }
+    
+    public Tabungan findByUser(Tabungan tabungan){
+        return daoTabungan.findByUser(tabungan);
+    }
 }
