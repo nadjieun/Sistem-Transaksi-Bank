@@ -14,18 +14,20 @@
     <body>
         <h1>Selamat Datang di Bank Krut</h1>
         <br>
-        <form action="transaksionline.jsp">
-            <table>
-                <tr>
-                    <td>Username</td>
-                    <td>:</td>
-                    <td><input type="text" name="username"></td>
-                    <td>Password</td>
-                    <td>:</td>
-                    <td><input type="text" name="password"></td>
-                </tr>
-            </table>
+        <form action="transaksionlineproses.jsp">
+        <table>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="text" name="password"></td>
+            </tr>
+        </table>
             <button type="submit">Login</button>
+            <button><a href="transaksionline_transfer.jsp">Transfer</a></button>
+            <button><a href="transaksionline_ceksaldo.jsp">Cek Saldo</a></button>
         </form>
     </body>
 </html>

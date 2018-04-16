@@ -5,8 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="model.Tabungan"%>
-<%@page import="singleton.SingletonApp"%>
+<%@page import= "model.Tabungan"%>
+<%@page import= "singleton.SingletonApp"%>
 <!DOCTYPE html>
 <html>
     <head>
